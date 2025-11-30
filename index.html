@@ -55,7 +55,32 @@
       <button type="button" id="genPesel" style="margin-top:6px; width:100%;">Wygeneruj PESEL</button>
     </div>
 
-    <div><label>Seria i numer dokumentu</label><input type="text" id="mdow_series"></div>
+    <label for="mdow_series">Seria i numer dokumentu:</label>
+<input type="text" id="mdow_series" value="MWYC 24561">
+
+<button type="button" onclick="losujDokument()" style="margin-top:5px;">
+    Wylosuj numer dokumentu
+</button>
+
+<script>
+
+function losujDokument() {
+    // Losowanie 3–4 liter (jak w polskich dokumentach)
+    const litery = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const dlugoscLiter = Math.random() < 0.5 ? 3 : 4;
+    let seria = "";
+    for (let i = 0; i < dlugoscLiter; i++) {
+        seria += litery[Math.floor(Math.random() * litery.length)];
+    }
+
+    // Losowanie 5 cyfr
+    let cyfry = Math.floor(10000 + Math.random() * 90000);
+
+    // Wstawienie wyniku
+    document.getElementById("mdow_series").value = `${seria} ${cyfry}`;
+}
+</script>
+
     <div><label>Data wydania</label><input type="text" id="issue_date"></div>
     <div><label>Data ważności</label><input type="text" id="expiry_date"></div>
     <div><label>Imię ojca</label><input type="text" id="father_name"></div>
